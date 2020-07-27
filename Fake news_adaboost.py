@@ -110,3 +110,12 @@ print(grid.best_estimator_)
 # print classification report 
 grid_predictions = grid.predict(x_test) 
 print(classification_report(y_test, grid_predictions))
+from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import cross_val_score
+dt=DecisionTreeClassifier()
+dt.fit(x_train,y_train)
+y_pred = dt.predict(x_test)
+accuracy = cross_val_score(estimator = dt, X = x_train, y = y_train, cv=10)
+print("Model accuracy : {:0.2f}%".format(accuracy_score(y_pred,y_test)*100))
+print("cross validation : {:0.2f}%".format(accuracy.mean()*100))
